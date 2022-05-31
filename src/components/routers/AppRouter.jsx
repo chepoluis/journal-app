@@ -12,6 +12,8 @@ import { useDispatch } from 'react-redux';
 import { JournalScreen } from '../journal/JournalScreen';
 import { AuthRouter } from './AuthRouter';
 import { login } from '../../actions/auth';
+import { PublicRoute } from './PublicRoute';
+import { PrivateRoute } from './PrivateRoute';
 
 export const AppRouter = () => {
 
@@ -50,9 +52,21 @@ export const AppRouter = () => {
           {/* A <Switch> looks through its children <Route>s and
               renders the first one that matches the current URL. */}
           <Switch>
-            <Route path="/auth" component={ AuthRouter } />
 
-            <Route exact path="/" component={ JournalScreen } />
+            <PublicRoute 
+              path="/auth/login"
+              component={ AuthRouter }
+              isAuthenticated={ isLoggedIn }
+            />
+
+            <PrivateRoute
+              exact
+              path="/"
+              component={ JournalScreen }
+              isAuthenticated={ isLoggedIn }
+            />
+
+            {/* <Route exact path="/" component={ JournalScreen } /> */}
 
             <Redirect to="/auth/login" />
           </Switch>
