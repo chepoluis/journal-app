@@ -4,7 +4,6 @@ import firebase from 'firebase/app';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
   Redirect
 } from "react-router-dom";
 import { useDispatch } from 'react-redux';
